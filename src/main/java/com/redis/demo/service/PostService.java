@@ -10,4 +10,6 @@ import com.redis.demo.model.Post;
 public interface PostService {
 	public Boolean savePost(Post post);
 	public List<Post> getAllPost();
+	public Post getPostById(String id);
+	public void deletePostById(String id);
 }

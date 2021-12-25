@@ -16,6 +16,9 @@ public class PostRepository {
 	
 	private static final String KEY="USER";
 	
+	/*
+	 * save post to redis
+	 */
 	public void savePost(Post post) {
 		redisTemplate.opsForHash().put(KEY, post.getId().toString(), post);
 	}
@@ -25,4 +28,16 @@ public class PostRepository {
 		posts=redisTemplate.opsForHash().values(KEY);
 		return posts;
 	}
+
+	public Post getPostById(String id) {
+		return (Post)redisTemplate.opsForHash().get(KEY, id.toString());
+	}
+
+	public void deletePostById(String id) {
+		redisTemplate.opsForHash().delete(KEY, id);
+		
+	}
+	
+	
+	
 }
